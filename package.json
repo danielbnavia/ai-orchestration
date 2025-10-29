@@ -1,0 +1,55 @@
+{
+  "name": "workflow-hub-ai-orchestration",
+  "version": "1.0.0",
+  "description": "AI orchestration system for coordinating multiple AI CLI tools in Workflow Hub",
+  "main": "src/index.js",
+  "scripts": {
+    "install-deps": "node install.js",
+    "setup": "node setup.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "ai-orchestration:start": "node src/orchestrator.js",
+    "ai-orchestration:delegate": "node src/cli.js delegate",
+    "ai-orchestration:parallel": "node src/cli.js parallel",
+    "ai-orchestration:status": "node src/cli.js status",
+    "ai-orchestration:interactive": "node src/cli.js interactive",
+    "ai-orchestration:test": "node src/simple-cli.js test",
+    "ai-orchestration:help": "node src/simple-cli.js help",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "ai",
+    "orchestration",
+    "claude",
+    "openai",
+    "gemini",
+    "cursor",
+    "perplexity",
+    "workflow",
+    "automation"
+  ],
+  "author": "Workflow Hub Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "inquirer": "^8.2.6",
+    "node-cron": "^3.0.3",
+    "ora": "^5.4.1",
+    "winston": "^3.11.0",
+    "ws": "^8.14.2",
+    "yaml": "^2.3.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

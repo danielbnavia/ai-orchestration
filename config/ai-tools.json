@@ -1,0 +1,149 @@
+{
+  "aiTools": {
+    "claude": {
+      "name": "Claude",
+      "provider": "anthropic",
+      "enabled": true,
+      "priority": 1,
+      "capabilities": [
+        "code_review",
+        "complex_reasoning",
+        "documentation",
+        "architecture_analysis",
+        "security_review"
+      ],
+      "config": {
+        "apiKey": "${ANTHROPIC_API_KEY}",
+        "model": "claude-3-5-sonnet-20241022",
+        "maxTokens": 4096,
+        "temperature": 0.1,
+        "timeout": 30000
+      },
+      "cli": null
+    },
+    "openai": {
+      "name": "OpenAI",
+      "provider": "openai",
+      "enabled": true,
+      "priority": 2,
+      "capabilities": [
+        "code_generation",
+        "text_processing",
+        "api_development",
+        "testing",
+        "refactoring"
+      ],
+      "config": {
+        "apiKey": "${OPENAI_API_KEY}",
+        "model": "gpt-4-turbo-preview",
+        "maxTokens": 4096,
+        "temperature": 0.2,
+        "timeout": 30000
+      },
+      "cli": null
+    },
+    "gemini": {
+      "name": "Gemini",
+      "provider": "google",
+      "enabled": true,
+      "priority": 3,
+      "capabilities": [
+        "multimodal_tasks",
+        "large_context",
+        "research",
+        "data_analysis",
+        "creative_tasks"
+      ],
+      "config": {
+        "apiKey": "${GOOGLE_AI_API_KEY}",
+        "model": "gemini-1.5-pro",
+        "maxTokens": 8192,
+        "temperature": 0.3,
+        "timeout": 45000
+      },
+      "cli": null
+    },
+    "cursor": {
+      "name": "Cursor",
+      "provider": "cursor",
+      "enabled": true,
+      "priority": 4,
+      "capabilities": [
+        "ide_integration",
+        "real_time_assistance",
+        "code_completion",
+        "refactoring",
+        "debugging"
+      ],
+      "config": {
+        "apiKey": "${CURSOR_API_KEY}",
+        "model": "cursor-pro",
+        "maxTokens": 4096,
+        "temperature": 0.1,
+        "timeout": 20000
+      },
+      "cli": null
+    },
+    "perplexity": {
+      "name": "Perplexity",
+      "provider": "perplexity",
+      "enabled": true,
+      "priority": 5,
+      "capabilities": [
+        "web_search",
+        "real_time_info",
+        "research",
+        "fact_checking",
+        "trend_analysis"
+      ],
+      "config": {
+        "apiKey": "${PERPLEXITY_API_KEY}",
+        "model": "llama-3.1-sonar-large-128k-online",
+        "maxTokens": 4096,
+        "temperature": 0.2,
+        "timeout": 60000
+      },
+      "cli": null
+    }
+  },
+  "orchestration": {
+    "maxConcurrentTasks": 3,
+    "taskTimeout": 300000,
+    "retryAttempts": 3,
+    "retryDelay": 5000,
+    "sessionPersistence": true,
+    "contextSharing": true,
+    "monitoring": {
+      "enabled": true,
+      "metricsInterval": 30000,
+      "logLevel": "info"
+    }
+  },
+  "workflows": {
+    "codeReview": {
+      "primary": "claude",
+      "secondary": ["openai", "cursor"],
+      "fallback": "gemini"
+    },
+    "codeGeneration": {
+      "primary": "openai",
+      "secondary": ["cursor", "claude"],
+      "fallback": "gemini"
+    },
+    "research": {
+      "primary": "perplexity",
+      "secondary": ["gemini", "claude"],
+      "fallback": "openai"
+    },
+    "architecture": {
+      "primary": "claude",
+      "secondary": ["gemini", "openai"],
+      "fallback": "cursor"
+    },
+    "testing": {
+      "primary": "openai",
+      "secondary": ["cursor", "claude"],
+      "fallback": "gemini"
+    }
+  }
+}
