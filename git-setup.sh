@@ -49,7 +49,7 @@ echo ""
 if [ -f .env ]; then
     echo "✅ .env exists (will be excluded from commits)"
     # Make sure .env is in .gitignore
-    if grep -q '\.env' .gitignore 2>/dev/null; then
+    if grep -q '^\.env' .gitignore 2>/dev/null; then
         echo "✅ .env is in .gitignore"
     else
         echo "⚠️  Warning: .env not in .gitignore (should add it)"
@@ -86,16 +86,17 @@ if git diff --cached --quiet; then
 else
     # Commit
     echo "💾 Creating initial commit..."
-    git commit -m "Initial commit: AI Orchestration System" \
-                -m "" \
-                -m "Complete documentation:" \
-                -m "- TROUBLESHOOTING.md - Complete debugging guide with all known issues" \
-                -m "- AI_TEAM_INSTRUCTIONS.md - Specific instructions for AI assistants" \
-                -m "- README_GITHUB.md - GitHub-ready README with status badges" \
-                -m "- GIT_SETUP.md - Step-by-step Git setup instructions" \
-                -m "- .gitignore - Protects sensitive files (.env, node_modules)" \
-                -m "- .env.example - Template for other developers" \
-                -m "- git-setup.sh - Automated Git setup script"
+    COMMIT_MSG="Initial commit: AI Orchestration System
+
+Complete documentation:
+- TROUBLESHOOTING.md - Complete debugging guide with all known issues
+- AI_TEAM_INSTRUCTIONS.md - Specific instructions for AI assistants
+- README_GITHUB.md - GitHub-ready README with status badges
+- GIT_SETUP.md - Step-by-step Git setup instructions
+- .gitignore - Protects sensitive files (.env, node_modules)
+- .env.example - Template for other developers
+- git-setup.sh - Automated Git setup script"
+    git commit -m "$COMMIT_MSG"
     echo "✅ Initial commit created"
 fi
 echo ""
